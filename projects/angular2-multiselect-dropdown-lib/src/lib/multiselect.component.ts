@@ -810,7 +810,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
 
     }
     selectGroup(item: any) {
-        if (item.disabled || this.settings.selectGroup) {
+        if (item.disabled || !this.settings.selectGroup) {
             return false;
         }
         if (item.selected) {
