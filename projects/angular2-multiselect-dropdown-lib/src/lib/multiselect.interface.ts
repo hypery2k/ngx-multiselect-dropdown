@@ -1,5 +1,6 @@
 export interface DropdownSettings{
     singleSelection: boolean;
+    singleGroupItemSelection: boolean;
     text: string;
     enableCheckAll : boolean;
     selectAllText: string;

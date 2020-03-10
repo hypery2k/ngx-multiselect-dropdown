@@ -130,6 +130,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
     subscription: Subscription;
     defaultSettings: DropdownSettings = {
         singleSelection: false,
+        singleGroupItemSelection: false,
         text: 'Select',
         enableCheckAll: true,
         selectAllText: 'Select All',
@@ -648,9 +649,14 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             let cnt = 0;
             if (obj.grpTitle && (item[key] == obj[key])) {
                 if (obj.list) {
-                    obj.list.forEach((el: any) => {
+                    obj.list.forEach((el: any, index) => {
                         if (this.isSelected(el)) {
                             cnt++;
+                        }
+                        if (cnt >= 1 && this.settings.singleGroupItemSelection) {
+                            if(el.itemName !== item.itemName) {
+                                this.removeSelected(el);
+                            }
                         }
                     });
                 }
@@ -666,9 +672,14 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             let cnt = 0;
             if (obj.grpTitle && (item[key] == obj[key])) {
                 if (obj.list) {
-                    obj.list.forEach((el: any) => {
+                    obj.list.forEach((el: any, index) => {
                         if (this.isSelected(el)) {
                             cnt++;
+                        }
+                        if (cnt >= 1 && this.settings.singleGroupItemSelection) {
+                            if(el.itemName !== item.itemName) {
+                                this.removeSelected(el);
+                            }
                         }
                     });
                 }
