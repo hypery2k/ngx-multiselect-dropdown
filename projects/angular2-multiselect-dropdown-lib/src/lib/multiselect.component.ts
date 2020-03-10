@@ -810,7 +810,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
 
     }
     selectGroup(item: any) {
-        if (item.disabled) {
+        if (item.disabled || this.settings.selectGroup) {
             return false;
         }
         if (item.selected) {
@@ -820,8 +820,7 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             });
             this.updateGroupInfo(item);
             this.onGroupSelect.emit(item);
-        }
-        else {
+        } else {
             item.selected = true;
             item.list.forEach((obj: any) => {
                 if (!this.isSelected(obj)) {
@@ -832,7 +831,6 @@ export class AngularMultiSelect implements OnInit, ControlValueAccessor, OnChang
             this.updateGroupInfo(item);
             this.onGroupDeSelect.emit(item);
         }
-
 
     }
     addFilterNewItem() {
